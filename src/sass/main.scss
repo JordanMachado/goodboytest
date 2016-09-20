@@ -1,0 +1,26 @@
+@import "reset";
+
+$gray: hsla(0, 0%, 25%, 0.05);
+
+body {
+  color: #1d1d1d;
+  background: #eee;
+  font-family: 'Helvetica', sans-serif;
+}
+
+canvas {
+  margin: 0;
+  padding: 0;
+}
+//nicer error messages during development
+.errorify {
+  color: red;
+  padding: 20px;
+  font-family: 'Courier', monospace;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
