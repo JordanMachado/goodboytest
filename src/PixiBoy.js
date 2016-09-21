@@ -1,18 +1,25 @@
 import PIXI from 'pixi.js';
+import {
+  PIXIBOY_SCALE,
+  GRAVITY,
+  JUMP_FORCE,
+} from 'Const';
 
 export default class PixiBoy extends PIXI.Sprite {
   constructor({ texture }) {
     super(texture);
-    this.gravity = 0.4;
+    this.anchor.x = 0.5;
+    this.anchor.y = 0.5;
+    this.scale = new PIXI.Point(PIXIBOY_SCALE, PIXIBOY_SCALE);
+    this.gravity = GRAVITY;
     this.velocity = {
       x: 0,
       y: 0,
     };
-    console.log('pixi boy');
   }
   onClick() {
     TweenMax.to(this.velocity, 0.1, {
-      y: -10,
+      y: JUMP_FORCE,
     });
   }
   update() {
