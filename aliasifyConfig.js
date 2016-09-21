@@ -1,7 +1,10 @@
 module.exports = {
   aliases: {
-    Const: './src/utils/Const.js',
-    Pool: './src/Pool.js',
+    Const: './src/js/utils/Const.js',
+    Global: './src/js/utils/Global.js',
+    Pool: './src/js/Pool.js',
+    Mediator: './src/js/utils/Mediator.js',
+    Messages: './src/js/utils/Messages.js',
   },
   verbose: false,
 };

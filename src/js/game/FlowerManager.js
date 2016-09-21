@@ -19,15 +19,28 @@ export default class FlowerManager {
     this.pool = new Pool({
       type: Flower,
     });
-    this.create();
+
     const textures = PIXI.loader.resources['assets/WorldAssets.json'].textures;
     this.textures = [
       textures['01_hanging_flower1.png'],
       textures['01_hanging_flower2.png'],
       textures['01_hanging_flower3.png'],
     ];
+
+    this.start();
+    this.spawn();
   }
-  create() {
+  start() {
+    for (let i = 0; i < 10; i += 1) {
+      const flower = this.pool.get();
+      flower.texture = this.textures[Math.floor(Math.random() * this.textures.length)];
+      flower.position.y = -Math.random() * flower.height;
+      flower.position.x = this.renderer.width * Math.random();
+      this.container.addChild(flower);
+      this.flowers.push(flower);
+    }
+  }
+  spawn() {
     const rand = Math.round(Math.random() * (FLOWER_SPAWN_MAX - FLOWER_SPAWN_MIN)) + FLOWER_SPAWN_MIN;
     setTimeout(() => {
       const flower = this.pool.get();
@@ -36,7 +49,7 @@ export default class FlowerManager {
       flower.position.x = this.renderer.width;
       this.container.addChild(flower);
       this.flowers.push(flower);
-      this.create();
+      this.spawn();
     }, rand);
 
   }

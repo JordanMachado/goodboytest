@@ -1,38 +1,66 @@
 import PIXI from 'pixi.js';
 import raf from 'raf';
 
-
 import {
-  SPEED,
-} from 'Const';
+  RESIZE,
+} from 'Messages';
+import GLOBAL from 'Global';
+import Mediator from 'Mediator';
 
+import Intro from './Intro';
 import CollisionManager from './CollisionManager';
 import LayerManager from './LayerManager';
 
 import PixiBoy from './PixiBoy';
+import Particles from './Particles';
 
 export default class Game {
   constructor() {
     this.stage = new PIXI.Container();
-    this.renderer = new PIXI.autoDetectRenderer(480, 250);
+    this.renderer = new PIXI.autoDetectRenderer(GLOBAL.width, GLOBAL.height, {
+      antialiasing: true,
+    });
     document.body.appendChild(this.renderer.view);
+    this.createContainers();
     this.loader = PIXI.loader;
     this.resources = PIXI.loader.resources;
     this.loader
     .add('assets/WorldAssets.json')
     .add('assets/flyingPixie.png')
+    .add('assets/playButton.png')
     .add('assets/column.png')
     .load(this.setup.bind(this));
-  }
-  setup() {
-    this.background = new PIXI.Container();
-    this.middleGround = new PIXI.Container();
-    this.forGround = new PIXI.Container();
 
+    Mediator.on(RESIZE, ({ width, height }) => {
+      this.resize(width, height);
+    });
+  }
+  createContainers() {
+
+    this.background = new PIXI.Container();
     this.stage.addChild(this.background);
+
+    this.middleGround = new PIXI.Container();
     this.stage.addChild(this.middleGround);
+
+    this.forGround = new PIXI.Container();
     this.stage.addChild(this.forGround);
 
+    this.intro = new PIXI.Container();
+    this.stage.addChild(this.intro);
+
+  }
+  start() {
+    new Intro({ container: this.intro, renderer: this.renderer });
+    this.renderer.render(this.stage);
+  }
+  setup() {
+
+
+    // this.particles = new Particles({
+    //   container: this.middleGround,
+    //   texture: this.resources['assets/flyingPixie.png'].texture,
+    // });
     this.layerManager = new LayerManager({
       background: this.background,
       middleGround: this.middleGround,
@@ -50,38 +78,30 @@ export default class Game {
       columns: this.layerManager.columnManager.columns,
     });
 
-
-
-
-
-
-
-
-    // this.poolTree = new Pool({ type: Tree, size: 20, texture: id['02_tree_2.png']});
-    // this.trees = [];
-    // setInterval(() => {
-    //   let tree = this.poolTree.get();
-    //   tree.position.x = 300;
-    //   this.stage.addChild(tree);
-    //   this.trees.push(tree);
-    // }, 400);
-
+    this.start();
     this.update();
   }
 
   update() {
     this.renderer.render(this.stage);
     this.layerManager.update();
+    // this.particles.update();
 
     this.collisionManager.update();
-    this.pixiboy.update();
+    // this.pixiboy.update();
 
     raf(this.update.bind(this));
   }
   resize(width, height) {
-    this.renderer.view.style.width = `${width}px`;
-    this.renderer.view.style.height = `${height}px`;
-    // this.renderer.resize(width, height);
+    const h = 250;
+    const ratio = height / h;
+    const newWidth = (width / ratio);
 
+    this.renderer.view.style.height = `${h * ratio}px`;
+    this.renderer.view.style.width = `${width}px`;
+    this.renderer.resize(newWidth, h);
+
+    GLOBAL.width = (width / ratio);
+    GLOBAL.height = h;
   }
 }

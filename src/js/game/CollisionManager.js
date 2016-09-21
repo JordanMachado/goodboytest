@@ -1,7 +1,13 @@
+import {
+  PIXI_BOY_DIED,
+} from 'Messages';
+import Mediator from 'Mediator';
+
 export default class CollisionManager {
   constructor({ player, columns }) {
     this.player = player;
     this.columns = columns;
+
   }
   update() {
     // console.log(this.columns.length);
@@ -16,7 +22,7 @@ export default class CollisionManager {
       if (xdist > -(cls[i].width / 2) && (xdist < cls[i].width / 2)) {
         if (p.position.y - (p.width / 2) < ct.position.y + ct.height
             || p.position.y + (p.height / 2) > cb.position.y) {
-          console.log('yo');
+          Mediator.emit(PIXI_BOY_DIED)
         }
       }
     }

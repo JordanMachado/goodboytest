@@ -2,10 +2,23 @@
 
 $gray: hsla(0, 0%, 25%, 0.05);
 
+@font-face {
+	font-family:'FredokaOne-Regular';
+	src: url('assets/fonts/fredoka/FredokaOne-Regular.eot');
+	src: url('assets/fonts/fredoka/FredokaOne-Regular.eot?#iefix') format('embedded-opentype'),
+		url('assets/fonts/fredoka/FredokaOne-Regular.woff') format('woff'),
+		url('assets/fonts/fredoka/FredokaOne-Regular.ttf') format('truetype'),
+		url('assets/fonts/fredoka/FredokaOne-Regular.svg#FredokaOne-Regular') format('svg');
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+0020-FB03;
+}
+
 body {
   color: #1d1d1d;
   background: #eee;
-  font-family: 'Helvetica', sans-serif;
+  font-family:'FredokaOne-Regular';
 }
 
 canvas {

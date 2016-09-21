@@ -17,20 +17,7 @@ export default class LayerManager {
     this.for = forGround;
     this.renderer = renderer;
 
-    this.treeManager = new TreeManager({
-      container: this.back,
-      renderer: this.renderer,
-    });
 
-    this.flowerManager = new FlowerManager({
-      container: this.mid,
-      renderer: this.renderer,
-    });
-
-    window.columnManager = this.columnManager = new ColumnManager({
-      container: this.for,
-      renderer: this.renderer,
-    });
 
     // todo in json
     const layerData = [
@@ -107,6 +94,21 @@ export default class LayerManager {
       layerData[i].container.addChild(layer);
       this.layers.push(layer);
     }
+
+    this.treeManager = new TreeManager({
+      container: this.back,
+      renderer: this.renderer,
+    });
+
+    this.flowerManager = new FlowerManager({
+      container: this.mid,
+      renderer: this.renderer,
+    });
+
+    window.columnManager = this.columnManager = new ColumnManager({
+      container: this.for,
+      renderer: this.renderer,
+    });
   }
   update() {
     for (let i = 0; i < this.layers.length; i += 1) {

@@ -11,18 +11,18 @@ const budo = require('budo')
 const browserify = require('browserify')
 const resetCSS = require('node-reset-scss').includePath
 const babelify = require('babelify').configure({
-  presets: ['es2015'] 
+  presets: ['es2015']
 })
 
-const entry = './src/index.js'
+const entry = './src/js/index.js'
 const outfile = 'bundle.js'
 
 //our CSS pre-processor
 gulp.task('sass', function() {
   gulp.src('./src/sass/main.scss')
-    .pipe(sass({ 
+    .pipe(sass({
       outputStyle: argv.production ? 'compressed' : undefined,
-      includePaths: [ resetCSS ] 
+      includePaths: [ resetCSS ]
     }).on('error', sass.logError))
     .pipe(gulp.dest('./app'))
 })
