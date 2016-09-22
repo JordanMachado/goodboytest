@@ -56,7 +56,7 @@ export default class FlowerManager {
   update() {
     for (let i = 0; i < this.flowers.length; i += 1) {
       this.flowers[i].update();
-      if (this.flowers[i].position.x < -this.flowers[i].width) {
+      if (this.flowers[i].position.x < -this.flowers[i].width - 50) {
         this.pool.release(this.flowers[i]);
         this.container.removeChild(this.flowers[i]);
         this.flowers.splice(i, 1);

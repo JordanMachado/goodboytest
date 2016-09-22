@@ -5,6 +5,12 @@ import {
   JUMP_FORCE,
 } from 'Const';
 
+import {
+  CLICK,
+  PIXIBOY_JUMP,
+} from 'Messages';
+import Mediator from 'Mediator';
+
 export default class PixiBoy extends PIXI.Sprite {
   constructor() {
     super();
@@ -19,20 +25,21 @@ export default class PixiBoy extends PIXI.Sprite {
       x: 0,
       y: 0,
     };
+    Mediator.on(CLICK, this.jump.bind(this));
   }
   jump() {
-    if (!this.canJump) return;
+    if (!this.canJump || this.position.y + JUMP_FORCE < 20) return;
+
     TweenMax.to(this.velocity, 0.1, {
       y: JUMP_FORCE,
     });
-    TweenMax.to(this.position, 0.1, {
-      y: this.position.y - 5,
-    });
+    Mediator.emit(PIXIBOY_JUMP, { position: this.position });
   }
   update() {
     this.velocity.y += this.gravity;
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
+
     this.rotation = (Math.PI / 180) * this.velocity.y;
   }
   jojo() {

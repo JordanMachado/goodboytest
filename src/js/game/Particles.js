@@ -1,63 +1,69 @@
 import PIXI from 'pixi.js';
 import particles from 'pixi-particles';
+import {
+  PIXIBOY_JUMP,
+} from 'Messages';
+import Mediator from 'Mediator';
 
 export default class Particles {
-  constructor({ container, texture}) {
+  constructor({ container, texture }) {
     console.log('particles');
+    Mediator.on(PIXIBOY_JUMP, ({ position }) => {
+      this.emit(position);
+
+    });
+    this.emitterContainer = new PIXI.Container();
+    container.addChild(this.emitterContainer);
+    this.emitterContainer.position.x = 100;
+    this.emitterContainer.position.y = 100;
     this.emitter = new PIXI.particles.Emitter(
-    container,
-    [texture],
-    {
+      this.emitterContainer,
+      [texture],
+      {
         alpha: {
-            start: 0.8,
-            end: 0.1
-        },
-        scale: {
-            start: 1,
-            end: 0.3
-        },
-        color: {
-            start: "fb1010",
-            end: "f5b830"
-        },
-        speed: {
-            start: 200,
-            end: 100
+          start: 0.8,
+          end: 0.1,
         },
         startRotation: {
-            min: 0,
-            max: 360
+          min: 0,
+          max: 360,
         },
-        rotationSpeed: {
-            min: 0,
-            max: 0
+        scale: {
+          start: 1,
+          end: 0.1,
+        },
+        color: {
+          start: 'ffffff',
+          end: 'E3E3E3',
+        },
+        speed: {
+          start: 100,
+          end: 10,
         },
         lifetime: {
-            min: 0.5,
-            max: 0.5
+          min: 0.5,
+          max: 0.5,
         },
         frequency: 0.008,
-        emitterLifetime: 31,
-        maxParticles: 1000,
+        emitterLifetime: 0.2,
+        maxParticles: 300,
         pos: {
-            x: 0,
-            y: 0
+          x: 0,
+          y: 0,
         },
-        addAtBack: false,
-        spawnType: "circle",
-        spawnCircle: {
-            x: 0,
-            y: 0,
-            r: 10
-        }
-    }
-);
-  this.emitter.emit = true;
-  this.elapsed = Date.now();
+      }
+    );
+    this.elapsed = Date.now();
+  }
+  emit(position) {
+    this.emitter.emit = true;
+    this.emitterContainer.position.x = position.x - 10;
+    this.emitterContainer.position.y = position.y;
   }
   update() {
-    var now = Date.now();
+    const now = Date.now();
     this.emitter.update((now - this.elapsed) * 0.001);
     this.elapsed = now;
+
   }
 }

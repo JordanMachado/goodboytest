@@ -1,10 +1,10 @@
 export const GLOBAL_SPEED = 1.8;
 
 export const COLUMN_SCALE_X = 0.35;
-export const COLUMN_SPACE = 80;
+export const COLUMN_SPACE = 90;
 
-export const COLUMN_SPAWN_MIN = 1000;
-export const COLUMN_SPAWN_MAX = 2000;
+export const COLUMN_SPAWN_MIN = 1400;
+export const COLUMN_SPAWN_MAX = 2400;
 
 
 export const TREE_SPAWN_MIN = 4000;

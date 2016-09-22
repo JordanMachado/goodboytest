@@ -17,8 +17,6 @@ export default class LayerManager {
     this.for = forGround;
     this.renderer = renderer;
 
-
-
     // todo in json
     const layerData = [
       {

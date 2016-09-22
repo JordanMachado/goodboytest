@@ -4,6 +4,10 @@ import {
   COLUMN_SPAWN_MIN,
   COLUMN_SPAWN_MAX,
 } from 'Const';
+import {
+  COLUMN_SPAWN,
+} from 'Messages';
+import Mediator from 'Mediator';
 
 import Pool from './Pool.js';
 import Column from './Column';
@@ -28,6 +32,7 @@ export default class ColumnManager {
       this.container.addChild(column);
       this.columns.push(column);
       this.create();
+      Mediator.emit(COLUMN_SPAWN, { column });
     }, rand);
 
   }
