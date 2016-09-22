@@ -1,6 +1,9 @@
 import PIXI from 'pixi.js';
+
+
 import {
   PIXIBOY_SCALE,
+
   GRAVITY,
   JUMP_FORCE,
 } from 'Const';
@@ -8,14 +11,17 @@ import {
 import {
   CLICK,
   PIXIBOY_JUMP,
+  PIXI_BOY_TOGGLE,
 } from 'Messages';
 import Mediator from 'Mediator';
 
 export default class PixiBoy extends PIXI.Sprite {
   constructor() {
     super();
-    this.texture = PIXI.loader.resources['assets/flyingPixie.png'].texture;
-    this.jojoTex = PIXI.loader.resources['assets/flyingPixie.png'].texture;
+    this.pixiTex = PIXI.loader.resources['assets/flyingPixie.png'].texture;
+    this.jojoTex = PIXI.loader.resources['assets/flyingJojo.png'].texture;
+    this.texture = this.pixiTex;
+    this.jojo = false;
     this.anchor.x = 0.5;
     this.anchor.y = 0.5;
     this.scale = new PIXI.Point(PIXIBOY_SCALE, PIXIBOY_SCALE);
@@ -26,6 +32,7 @@ export default class PixiBoy extends PIXI.Sprite {
       y: 0,
     };
     Mediator.on(CLICK, this.jump.bind(this));
+    Mediator.on(PIXI_BOY_TOGGLE, this.toogleText.bind(this));
   }
   jump() {
     if (!this.canJump || this.position.y + JUMP_FORCE < 20) return;
@@ -42,12 +49,14 @@ export default class PixiBoy extends PIXI.Sprite {
 
     this.rotation = (Math.PI / 180) * this.velocity.y;
   }
-  jojo() {
+  toogleText() {
     // change Jordan texture ^^
-    this.texture = this.jojoTex;
-  }
-  normal() {
-    // change to original texture
+    if (!this.jojo) {
+      this.texture = this.jojoTex;
+    } else {
+      this.texture = this.pixiTex;
+    }
+    this.jojo = !this.jojo;
   }
   die() {
     this.canJump = false;

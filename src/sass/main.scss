@@ -18,6 +18,7 @@ $gray: hsla(0, 0%, 25%, 0.05);
 body {
   color: #1d1d1d;
   background: #eee;
+  background: #eee;
   font-family:'FredokaOne-Regular';
 }
 
@@ -28,6 +29,24 @@ canvas {
   left:50%;
   top:50%;
   transform: translate(-50%,-50%);
+}
+#score {
+	position: absolute;
+	top:0;
+	left :0;
+	margin: 40px;
+	font-size: 34px;
+	color:white;
+	user-select:none;
+}
+#countdown {
+	position: absolute;
+	color: white;
+	top:50%;
+	left:50%;
+	font-size: 64px;
+	transform: translate(-50%, -50%);
+	user-select:none;
 }
 //nicer error messages during development
 .errorify {

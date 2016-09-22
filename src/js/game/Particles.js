@@ -10,7 +10,6 @@ export default class Particles {
     console.log('particles');
     Mediator.on(PIXIBOY_JUMP, ({ position }) => {
       this.emit(position);
-
     });
     this.emitterContainer = new PIXI.Container();
     container.addChild(this.emitterContainer);
@@ -53,6 +52,8 @@ export default class Particles {
         },
       }
     );
+    this.emitter.emit = false;
+
     this.elapsed = Date.now();
   }
   emit(position) {

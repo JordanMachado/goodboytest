@@ -32,17 +32,14 @@ export default class BonusManager {
       textures['pickup_02.png'],
       textures['pickup_03.png'],
       textures['pickup_04.png'],
-      textures['pickup_05.png'],
       textures['pickup_06.png'],
       textures['pickup_07.png'],
-      textures['pickup_08.png'],
     ];
     Mediator.on(COLUMN_SPAWN, ({ column }) => {
       this.spawn(column);
     });
   }
   spawn(column) {
-    console.log(column.bottom.position.y);
     const bonus = this.pool.get();
     const id = Math.floor(Math.random() * this.textures.length);
     bonus.set({

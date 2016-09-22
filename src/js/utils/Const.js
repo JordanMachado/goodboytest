@@ -1,4 +1,5 @@
-export const GLOBAL_SPEED = 1.8;
+// export const GLOBAL_SPEED = 2.4;
+export const GLOBAL_SPEED = 5;
 
 export const COLUMN_SCALE_X = 0.35;
 export const COLUMN_SPACE = 90;

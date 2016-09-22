@@ -18,11 +18,29 @@ export default class StartButton extends PIXI.Sprite {
     this.position.y = this.renderer.height / 2;
     this.scale = new PIXI.Point(0.3, 0.3);
     this.mouseup = this.mouseup.bind(this);
+
+    TweenMax.set(this, { alpha: 0 });
+    TweenMax.set(this.scale, { x: 0, y: 0 });
+
+    TweenMax.to(this.scale, 1.4, {
+      x: 0.3,
+      y: 0.3,
+      ease: Elastic.easeInOut,
+      delay: 1,
+    });
+    TweenMax.to(this, 1, {
+      alpha: 1,
+      delay: 1.5,
+    });
   }
   mouseup() {
     Mediator.emit(START_GAME);
+    TweenMax.to(this, 0.5, {
+      alpha: 0,
+      ease: Expo.easeOut,
+    });
     TweenMax.to(this.position, 0.5, {
-      y: -this.height,
+      y: 0,
       ease: Expo.easeOut,
       onComplete: () => {
         this.container.removeChild(this);

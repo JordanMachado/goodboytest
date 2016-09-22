@@ -16,5 +16,6 @@ export default class Flower extends PIXI.Sprite {
     this.tick += this.step;
     this.position.x -= GLOBAL_SPEED * 0.5;
     this.rotation = Math.PI / 180 * (Math.sin(this.tick) * 10);
+    // this.scale.y += 0.001;
   }
 }
