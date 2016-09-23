@@ -16,7 +16,9 @@ I hope that pleases you :)
 ![Alt text](http://jojo.ninja/share/goodboy.png "gregcortesi")
 
 Demo available [here](http://jojo.ninja/goodboy)
+
 Video desktop [here](http://jojo.ninja/goodboy/video/desktop)
+
 Video iphone6 [here](http://jojo.ninja/goodboy/video/iphone6)
 
 ## Run the project
