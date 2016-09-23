@@ -16,8 +16,10 @@ I hope that pleases you :)
 ![Alt text](http://jojo.ninja/share/goodboy.png "goodboy")
 
 Demo available [here](http://jojo.ninja/goodboy)
-Video desktop [here](http://jojo.ninja/goodboy/video/desktop)
-Video iphone6 [here](http://jojo.ninja/goodboy/video/iphone6)
+
+Video desktop [here](http://jojo.ninja/goodboy/video/desktop.mp4)
+
+Video iphone6 [here](http://jojo.ninja/goodboy/video/iphone6.mp4)
 
 ## Run the project
 
