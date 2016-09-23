@@ -1,4 +1,3 @@
-// export const GLOBAL.GAME.speed = 2.4;
 export const GAME_PAUSE_SPEED = 1.3;
 export const GAME_START_SPEED = 5;
 

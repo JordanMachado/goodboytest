@@ -44,7 +44,6 @@ export default class StartButton extends PIXI.Sprite {
     });
   }
   click() {
-    console.log(CLICK_START,'fdp');
     Mediator.emit(CLICK_START);
     TweenMax.to(this, 0.5, {
       alpha: 0,

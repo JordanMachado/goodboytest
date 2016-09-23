@@ -15,7 +15,7 @@ export default class Score {
     this.numberEl = document.createElement('span');
     this.numberEl.innerHTML = 0;
     this.el.appendChild(this.numberEl);
-    this.el.id = 'score';
+    this.el.classList = 'score';
     document.body.appendChild(this.el);
     this.pts = 0;
     Mediator.on(UPDATE_SCORE, () => {
@@ -54,7 +54,6 @@ export default class Score {
     this.numberEl.innerHTML = this.pts;
   }
   reset() {
-    console.log('reset');
     this.pts = 0;
     this.hide();
   }

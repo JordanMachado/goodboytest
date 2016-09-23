@@ -44,7 +44,8 @@ export default class FlowerManager {
   spawn() {
 
     if (GLOBAL.GAME.finished) return;
-    const rand = Math.round(Math.random() * (FLOWER_SPAWN_MAX - FLOWER_SPAWN_MIN)) + FLOWER_SPAWN_MIN;
+    const rand = Math.round(Math.random()
+    * (FLOWER_SPAWN_MAX - FLOWER_SPAWN_MIN)) + FLOWER_SPAWN_MIN;
     setTimeout(() => {
       const flower = this.pool.get();
       flower.texture = this.textures[Math.floor(Math.random() * this.textures.length)];

@@ -8,7 +8,7 @@ import Mediator from 'Mediator';
 export default class CountDown {
   constructor() {
     this.el = document.createElement('div');
-    this.el.id = 'countdown';
+    this.el.classList = 'countdown';
     document.body.appendChild(this.el);
     this.text = [
       '3',

@@ -1,6 +1,3 @@
-// inspiration http://www.goodboydigital.com/runpixierun/
-// http://www.rocketshipgames.com/blogs/tjkopena/2015/09/basic-scaling-animation-and-parallax-in-pixi-js-v3/
-// particles lava https://pixijs.github.io/pixi-particles/examples/bubblesVertical.html
 import gsap from 'gsap';
 import deviceType from 'ua-device-type';
 
@@ -12,8 +9,6 @@ import {
 import Mediator from 'Mediator';
 import GLOBAL from 'Global';
 import Game from './game/Game';
-
-const domify = require('domify');
 
 let game;
 let device;

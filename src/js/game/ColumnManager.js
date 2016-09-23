@@ -27,7 +27,8 @@ export default class ColumnManager {
   spawn(direct = false) {
 
     if (GLOBAL.GAME.finished) return;
-    const delay = Math.round(Math.random() * (COLUMN_SPAWN_MAX - COLUMN_SPAWN_MIN)) + COLUMN_SPAWN_MIN;
+    const delay = Math.round(Math.random()
+    * (COLUMN_SPAWN_MAX - COLUMN_SPAWN_MIN)) + COLUMN_SPAWN_MIN;
     setTimeout(() => {
 
       const column = this.pool.get();

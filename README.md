@@ -13,7 +13,7 @@ I hope that pleases you :)
 
 
 
-![Alt text](http://jojo.ninja/share/goodboy.png "gregcortesi")
+![Alt text](http://jojo.ninja/share/goodboy.png "goodboy")
 
 Demo available [here](http://jojo.ninja/goodboy)
 Video desktop [here](http://jojo.ninja/goodboy/video/desktop)

@@ -1,5 +1,6 @@
 import createPlayer from 'web-audio-player';
 import createAnalyser from 'web-audio-analyser';
+
 import GLOBAL from 'Global';
 import {
   COUNDOWN_START,
@@ -21,7 +22,6 @@ export default class Sound {
         volume: 1,
       });
     });
-    window.sound = this;
     Mediator.on(GAME_OVER, this.end.bind(this));
   }
   update() {

@@ -1,3 +1,4 @@
+import GLOBAL from 'Global';
 import {
   GAME_OVER,
 } from 'Messages';
@@ -6,7 +7,7 @@ import Mediator from 'Mediator';
 export default class GameOver {
   constructor() {
     this.el = document.createElement('p');
-    this.el.id = 'gameover';
+    this.el.classList = 'gameover';
     this.el.innerHTML = 'Gameover';
     document.body.appendChild(this.el);
     Mediator.on(GAME_OVER, this.show.bind(this));
@@ -21,6 +22,9 @@ export default class GameOver {
       autoAlpha: 1,
       y: 0,
       ease: Elastic.easeOut,
+      onComplete: () => {
+        GLOBAL.GAME.canRestart = true;
+      }
     });
   }
 }

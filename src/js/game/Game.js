@@ -30,9 +30,11 @@ export default class Game {
   constructor() {
 
     this.stage = new PIXI.Container();
+    /*eslint-disable */
     this.renderer = new PIXI.autoDetectRenderer(GLOBAL.GAME.width, GLOBAL.GAME.height, {
       antialiasing: true,
     });
+    /*eslint-enable */
     this.resize(window.innerWidth, window.innerHeight);
 
     document.body.appendChild(this.renderer.view);
@@ -64,7 +66,7 @@ export default class Game {
       this.resize(width, height);
     });
     Mediator.on(CLICK, () => {
-      if (GLOBAL.GAME.finished) this.restart();
+      if (GLOBAL.GAME.finished && GLOBAL.GAME.canRestart) this.restart();
     });
     Mediator.on(START_GAME, this.start.bind(this));
     Mediator.on(PIXI_BOY_DIED, () => {
@@ -100,7 +102,9 @@ export default class Game {
     });
   }
   restart() {
+    GLOBAL.GAME.finished = false;
     GLOBAL.GAME.started = false;
+    GLOBAL.GAME.canRestart = false;
     GLOBAL.GAME.speed = GAME_PAUSE_SPEED;
     this.pixiboy.init();
     this.introView.countDown.reset();
@@ -108,7 +112,6 @@ export default class Game {
     this.effects.reset();
     this.introView.countDown.start();
     this.gameOverView.hide();
-    GLOBAL.GAME.finished = false;
 
   }
   createAudio() {

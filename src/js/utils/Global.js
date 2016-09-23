@@ -9,6 +9,7 @@ const GLOBAL = {
   GAME: {
     finished: false,
     started: false,
+    canRestart: false,
     width: 480,
     height: 250,
     speed: GAME_PAUSE_SPEED,

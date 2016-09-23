@@ -1,6 +1,5 @@
 import PIXI from 'pixi.js';
 
-
 import {
   TREE_SPAWN_MIN,
   TREE_SPAWN_MAX,

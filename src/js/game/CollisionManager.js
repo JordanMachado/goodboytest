@@ -15,7 +15,6 @@ export default class CollisionManager {
   }
   update() {
     if (GLOBAL.GAME.finished) return;
-    // console.log(this.columns.length);
     const p = this.player;
     const cls = this.columns;
 

@@ -11,8 +11,6 @@ import ColumnManager from './ColumnManager';
 import LavaParticles from './LavaParticles';
 import BonusManager from './BonusManager';
 
-
-
 export default class LayerManager {
   constructor({ background, middleGround, forGround }) {
     this.back = background;
@@ -96,7 +94,7 @@ export default class LayerManager {
     }
 
     this.treeManager = new TreeManager({
-      container: this.back
+      container: this.back,
     });
 
     this.flowerManager = new FlowerManager({
