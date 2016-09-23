@@ -17,9 +17,9 @@ I hope that pleases you :)
 
 Demo available [here](http://jojo.ninja/goodboy)
 
-Video desktop [here](http://jojo.ninja/goodboy/video/desktop)
+Video desktop [here](http://jojo.ninja/goodboy/video/desktop.mp4)
 
-Video iphone6 [here](http://jojo.ninja/goodboy/video/iphone6)
+Video iphone6 [here](http://jojo.ninja/goodboy/video/iphone6.mp4)
 
 ## Run the project
 
