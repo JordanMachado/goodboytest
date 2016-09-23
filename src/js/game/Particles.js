@@ -4,12 +4,12 @@ import {
   PIXIBOY_JUMP,
 } from 'Messages';
 import Mediator from 'Mediator';
+import GLOBAL from 'Global';
 
 export default class Particles {
   constructor({ container, texture }) {
-    console.log('particles');
     Mediator.on(PIXIBOY_JUMP, ({ position }) => {
-      this.emit(position);
+      if (GLOBAL.GAME.started) this.emit(position);
     });
     this.emitterContainer = new PIXI.Container();
     container.addChild(this.emitterContainer);

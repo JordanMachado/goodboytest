@@ -5,14 +5,16 @@ import {
 } from 'Messages';
 import Mediator from 'Mediator';
 
+
 export default class CollisionManager {
-  constructor({ player, columns, bonus, renderer }) {
+  constructor({ player, columns, bonus }) {
     this.player = player;
     this.columns = columns;
     this.bonus = bonus;
 
   }
   update() {
+    if (GLOBAL.GAME.finished) return;
     // console.log(this.columns.length);
     const p = this.player;
     const cls = this.columns;
@@ -38,7 +40,7 @@ export default class CollisionManager {
       }
     }
 
-    if (this.player.position.y > GLOBAL.height) {
+    if (this.player.position.y > GLOBAL.GAME.height) {
       Mediator.emit(PIXI_BOY_DIED);
     }
   }

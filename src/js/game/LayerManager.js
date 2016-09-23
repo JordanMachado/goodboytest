@@ -1,21 +1,23 @@
 import PIXI from 'pixi.js';
-
-
+import GLOBAL from 'Global';
 import {
-  GLOBAL_SPEED,
-} from 'Const';
-
+  START_GAME,
+} from 'Messages';
+import Mediator from 'Mediator';
 import Layer from './Layer';
 import TreeManager from './TreeManager';
 import FlowerManager from './FlowerManager';
 import ColumnManager from './ColumnManager';
+import LavaParticles from './LavaParticles';
+import BonusManager from './BonusManager';
+
+
 
 export default class LayerManager {
-  constructor({ renderer, background, middleGround, forGround }) {
+  constructor({ background, middleGround, forGround }) {
     this.back = background;
     this.mid = middleGround;
     this.for = forGround;
-    this.renderer = renderer;
 
     // todo in json
     const layerData = [
@@ -25,7 +27,7 @@ export default class LayerManager {
           x: 0,
           y: 0,
         },
-        speed: GLOBAL_SPEED * 0.3,
+        damping: 0.3,
         container: this.back,
       },
       {
@@ -34,7 +36,7 @@ export default class LayerManager {
           x: 0,
           y: 0,
         },
-        speed: GLOBAL_SPEED * 0.4,
+        damping: 0.4,
         container: this.back,
       },
       {
@@ -44,7 +46,7 @@ export default class LayerManager {
           y: 0,
         },
         container: this.mid,
-        speed: GLOBAL_SPEED * 0.5,
+        damping: 0.5,
       },
       {
         id: '00_roof_leaves.png',
@@ -52,16 +54,16 @@ export default class LayerManager {
           x: 0,
           y: 0,
         },
-        speed: GLOBAL_SPEED * 0.9,
+        damping: 0.9,
         container: this.for,
       },
       {
         id: '03_rear_silhouette.png',
         position: {
           x: 0,
-          y: this.renderer.height - 96,
+          y: GLOBAL.GAME.height - 96,
         },
-        speed: GLOBAL_SPEED * 0.45,
+        damping: 0.45,
         container: this.mid,
       },
 
@@ -69,21 +71,21 @@ export default class LayerManager {
         id: '01_front_silhouette.png',
         position: {
           x: 0,
-          y: this.renderer.height - 108,
+          y: GLOBAL.GAME.height - 108,
         },
-        speed: GLOBAL_SPEED * 0.95,
+        damping: 0.95,
         container: this.for,
       },
     ];
     this.layers = [];
-    const textures = PIXI.loader.resources['assets/WorldAssets.json'].textures;
+    const textures = PIXI.loader.resources['assets/images/WorldAssets.json'].textures;
 
     for (let i = 0; i < layerData.length; i += 1) {
       const layer = new Layer({
         texture: textures[layerData[i].id],
-        width: textures[layerData[i].id].width,
+        width: GLOBAL.GAME.width,
         height: textures[layerData[i].id].height,
-        speed: layerData[i].speed,
+        damping: layerData[i].damping,
         position: {
           x: layerData[i].position.x,
           y: layerData[i].position.y,
@@ -94,19 +96,32 @@ export default class LayerManager {
     }
 
     this.treeManager = new TreeManager({
-      container: this.back,
-      renderer: this.renderer,
+      container: this.back
     });
 
     this.flowerManager = new FlowerManager({
       container: this.mid,
-      renderer: this.renderer,
+    });
+
+    this.lavaparticles = new LavaParticles({
+      container: this.for,
+      texture: PIXI.loader.resources['assets/images/particle.png'].texture,
+    });
+
+    this.bonusManager = new BonusManager({
+      container: this.for,
     });
 
     window.columnManager = this.columnManager = new ColumnManager({
       container: this.for,
-      renderer: this.renderer,
     });
+    Mediator.on(START_GAME, () => {
+      this.columnManager.spawn(true);
+    });
+  }
+  init() {
+    this.treeManager.start();
+    this.flowerManager.start();
   }
   update() {
     for (let i = 0; i < this.layers.length; i += 1) {
@@ -115,11 +130,16 @@ export default class LayerManager {
     this.treeManager.update();
     this.flowerManager.update();
     this.columnManager.update();
+    this.lavaparticles.update();
+    this.bonusManager.update();
 
   }
-  resize(width, height) {
-    for (let i = 0; i < this.layers.length; i += 1) {
-      this.layers[i].resize(width, height);
-    }
+  reset() {
+    this.treeManager.reset();
+    this.treeManager.start();
+    this.flowerManager.reset();
+    this.flowerManager.start();
+    this.columnManager.reset();
+    this.bonusManager.reset();
   }
 }

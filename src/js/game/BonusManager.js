@@ -12,7 +12,7 @@ import {
 } from 'Messages';
 import Mediator from 'Mediator';
 
-import Pool from './Pool.js';
+import Pool from 'Pool';
 import Bonus from './Bonus';
 
 
@@ -26,7 +26,7 @@ export default class BonusManager {
       type: Bonus,
     });
 
-    const textures = PIXI.loader.resources['assets/WorldAssets.json'].textures;
+    const textures = PIXI.loader.resources['assets/images/WorldAssets.json'].textures;
     this.textures = [
       textures['pickup_01.png'],
       textures['pickup_02.png'],
@@ -62,6 +62,14 @@ export default class BonusManager {
         this.bonus.splice(i, 1);
         i -= 1;
       }
+    }
+  }
+  reset() {
+    for (let i = 0; i < this.bonus.length; i += 1) {
+      this.pool.release(this.bonus[i]);
+      this.container.removeChild(this.bonus[i]);
+      this.bonus.splice(i, 1);
+      i -= 1;
     }
   }
 }

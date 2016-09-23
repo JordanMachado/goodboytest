@@ -1,10 +1,10 @@
 import PIXI from 'pixi.js';
 
 import {
-  GLOBAL_SPEED,
   COLUMN_SCALE_X,
   COLUMN_SPACE,
 } from 'Const';
+import GLOBAL from 'Global';
 
 export default class Flower extends PIXI.Sprite {
   constructor() {
@@ -14,8 +14,9 @@ export default class Flower extends PIXI.Sprite {
   }
   update() {
     this.tick += this.step;
-    this.position.x -= GLOBAL_SPEED * 0.5;
+    this.position.x -= GLOBAL.GAME.speed * 0.5;
     this.rotation = Math.PI / 180 * (Math.sin(this.tick) * 10);
-    // this.scale.y += 0.001;
+    this.scale.y = 1;
+    this.scale.y += GLOBAL.SOUND.volume * 0.3;
   }
 }

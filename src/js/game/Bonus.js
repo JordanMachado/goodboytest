@@ -1,9 +1,11 @@
 import PIXI from 'pixi.js';
 import {
-  GLOBAL_SPEED,
   COLUMN_SCALE_X,
   COLUMN_SPACE,
 } from 'Const';
+
+import GLOBAL from 'Global';
+
 
 export default class Bonus extends PIXI.Sprite {
   constructor() {
@@ -31,7 +33,12 @@ export default class Bonus extends PIXI.Sprite {
   }
   update() {
     this.tick += 0.1;
-    this.position.x -= GLOBAL_SPEED;
+    this.position.x -= GLOBAL.GAME.speed;
     this.position.y += Math.sin(this.tick) * this.amplitude;
+    if (!this.active) {
+      this.scale.x = GLOBAL.SOUND.volume + 0.5;
+      this.scale.y = GLOBAL.SOUND.volume + 0.5;
+    }
+
   }
 }

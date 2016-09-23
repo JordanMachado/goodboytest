@@ -1,10 +1,12 @@
-// export const GLOBAL_SPEED = 2.4;
-export const GLOBAL_SPEED = 5;
+// export const GLOBAL.GAME.speed = 2.4;
+export const GAME_PAUSE_SPEED = 1.3;
+export const GAME_START_SPEED = 5;
+
 
 export const COLUMN_SCALE_X = 0.35;
 export const COLUMN_SPACE = 90;
 
-export const COLUMN_SPAWN_MIN = 1400;
+export const COLUMN_SPAWN_MIN = 1300;
 export const COLUMN_SPAWN_MAX = 2400;
 
 

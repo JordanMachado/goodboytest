@@ -4,6 +4,8 @@ import {
   PIXIBOY_JUMP,
 } from 'Messages';
 import Mediator from 'Mediator';
+import GLOBAL from 'Global';
+
 
 export default class Particles {
   constructor({ container, texture }) {
@@ -44,7 +46,7 @@ export default class Particles {
           max: 2.5,
         },
         frequency: 0.008,
-        emitterLifetime: 20,
+        emitterLifetime: 200000,
         maxParticles: 500,
         pos: {
           x: 0,
@@ -60,7 +62,7 @@ export default class Particles {
       }
     );
     // this.emitter.emit = false;
-
+    window.part = this;
     this.elapsed = Date.now();
   }
   emit(position) {
@@ -72,6 +74,10 @@ export default class Particles {
     const now = Date.now();
     this.emitter.update((now - this.elapsed) * 0.001);
     this.elapsed = now;
+    this.emitter.endSpeed = GLOBAL.SOUND.volume * 100;
+    // this.emitterContainer.position.y = 100 + GLOBAL.SOUND.volume * 20;
+    // this.scale.y += GLOBAL.SOUND.volume * 0.1;
+
 
   }
 }

@@ -6,8 +6,13 @@ export const RESIZE = 'RESIZE';
 
 /* Global events */
 
+export const CLICK_START = 'CLICK_START';
+export const COUNDOWN_START = 'COUNDOWN_START';
 export const START_GAME = 'START_GAME';
+export const GAME_OVER = 'GAME_OVER';
 export const UPDATE_SCORE = 'UPDATE_SCORE';
+export const SOUND_LOADED = 'SOUND_LOADED';
+
 
 /* EASTER */
 

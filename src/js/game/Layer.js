@@ -1,18 +1,24 @@
 import PIXI from 'pixi.js';
+import GLOBAL from 'Global';
+import {
+  RESIZE,
+} from 'Messages';
+import Mediator from 'Mediator';
 
 export default class Layer extends PIXI.extras.TilingSprite {
-  constructor({ texture, width, height, speed, position }) {
+  constructor({ texture, width, height, damping, position }) {
     super(texture, width, height);
-    this.speed = speed || 0;
+    this.damping = damping || 0;
     this.position.x = position.x || 0;
     this.position.y = position.y || 0;
+
+    Mediator.on(RESIZE, this.resize.bind(this));
     // this.tileScale = new PIXI.Point(2,2)
   }
   update() {
-    this.tilePosition.x -= this.speed;
+    this.tilePosition.x -= GLOBAL.GAME.speed * this.damping;
   }
-  resize(width, height) {
-    console.log(this.width);
-    this.width = width;
+  resize() {
+    this.width = GLOBAL.GAME.width;
   }
 }
